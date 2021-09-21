@@ -11,12 +11,12 @@
 	height: 100vh;
 	
 	.base-container {
-		width: 75%;
+		width: 80%;
 		height: 100%;
 
 		.base-showcase {
 			width: 100%;
-			height: 70%;
+			height: 75%;
 			padding: 20px;
 			border: 1px solid var(--black-700);
 			background-color: var(--white-900);
@@ -24,7 +24,7 @@
 
 		.base {
 			width: 100%;
-			height: 30%;
+			height: 25%;
 			padding: 20px;
 			border: 1px solid var(--black-700);
 			background-color: var(--yellow-500);
@@ -32,12 +32,12 @@
 	}
 
 	.lateral-showcase-container {
-		width: 25%;
+		width: 20%;
 		height: 100%;
 
 		.lateral-showcase {
 			width: 100%;
-			height: 70%;
+			height: 75%;
 			padding: 20px;
 			border: 1px solid var(--black-700);
 			background-color: var(--yellow-500);
@@ -48,7 +48,7 @@
 			justify-content: center;
 			align-items: center;
 			width: 100%;
-			height: 30%;
+			height: 25%;
 			padding: 20px;
 			border: 1px solid var(--black-700);
 			background-color: var(--white-900);
