@@ -52,9 +52,12 @@
 			padding: 20px;
 			border: 1px solid var(--black-700);
 			background-color: var(--white-900);
-			color: var(--black-700);
-			font-weight: bold;
-			font-size: 30px;
+
+			span {
+				color: var(--black-700);
+				font-weight: bold;
+				font-size: 30px;
+			}
 		}
 	}
 }

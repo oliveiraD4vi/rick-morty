@@ -13,7 +13,7 @@ function App() {
         <div className="lateral-showcase"></div>
 
         <div className="element">
-          by me
+          <span>by me</span>
         </div>
       </div>
     </div>
