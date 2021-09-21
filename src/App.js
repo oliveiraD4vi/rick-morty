@@ -1,3 +1,5 @@
+import PeopleShowcase from './components/PeopleShowcase';
+
 import './styles/global.scss';
 
 function App() {
@@ -10,7 +12,9 @@ function App() {
       </div>
 
       <div className="lateral-showcase-container">
-        <div className="lateral-showcase"></div>
+        <div className="lateral-showcase">
+          <PeopleShowcase />
+        </div>
 
         <div className="element">
           <span>by me</span>
