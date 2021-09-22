@@ -9,7 +9,12 @@ export default function Search() {
 	return (
 		<div className="people-search">
 			<Space direction="vertical">
-				<Search placeholder="character search" allowClear onSearch={onSearch} style={{ width: 200 }} />
+				<Search 
+					placeholder="character search" 
+					allowClear 
+					onSearch={onSearch} 
+					style={{ width: 200 }}
+				/>
 			</Space>
 		</div>
 	);
