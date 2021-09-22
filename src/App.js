@@ -1,4 +1,5 @@
 import PeopleShowcase from './components/PeopleShowcase';
+import PeopleInfoShowcase from './components/PeopleInfoShowcase';
 
 import { PeopleInfoProvider } from './context/PeopleContext';
 import { PageProvider } from './context/PageContext';
@@ -11,7 +12,9 @@ function App() {
       <PageProvider>
         <div className="App">
           <div className="base-container">
-            <div className="base-showcase"></div>
+            <div className="base-showcase">
+              <PeopleInfoShowcase />
+            </div>
 
             <div className="base"></div>
           </div>

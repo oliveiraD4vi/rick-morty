@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { PageContext } from '../../../context/PageContext';
 import { notification } from 'antd';
+
+import { PageContext } from '../../../context/PageContext';
 
 import PeopleCard from './Card';
 import axios from 'axios';
@@ -38,7 +39,7 @@ export default function LateralShowcase() {
 		<div className="people-lateral-showcase">
 			{
 				people.map((person) => (
-					<PeopleCard name={person.name} key={uuidv4()} />
+					<PeopleCard name={person.name} id={person.id} key={uuidv4()} />
 				))
 			}
 		</div>
