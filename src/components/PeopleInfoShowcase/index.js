@@ -45,9 +45,9 @@ export default function PeopleInfoShowcase() {
 		<div className="people-info-container">
 			<div className="people-info-showcase">
 				<div className="header">
-					<MinusCircleOutlined />
-					<PlusCircleOutlined />
 					<CloseCircleOutlined />
+					<PlusCircleOutlined />
+					<MinusCircleOutlined />
 				</div>
 
 				<div className="content">

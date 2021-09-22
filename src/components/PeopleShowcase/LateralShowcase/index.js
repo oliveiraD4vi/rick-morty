@@ -39,7 +39,12 @@ export default function LateralShowcase() {
 		<div className="people-lateral-showcase">
 			{
 				people.map((person) => (
-					<PeopleCard name={person.name} id={person.id} key={uuidv4()} />
+					<PeopleCard 
+						key={uuidv4()}
+						name={person.name}
+						id={person.id}
+						image={person.image}
+					/>
 				))
 			}
 		</div>

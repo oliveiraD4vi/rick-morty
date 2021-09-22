@@ -1,16 +1,26 @@
 .people-card {
 	display: flex;
-	flex-direction: column;
 	padding: 10px;
-	width: 45%;
-	height: 20%;
+	width: 150px;
+	height: 150px;
 	border-radius: 5px;
 	background-color: var(--black-700);
 	margin: 5px;
+
+	img {
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		margin-right: 10px;
+	}
 
 	h3 {
 		color: var(--white-900);
 		font-size: 14px;
 		font-weight: bold;
 	}
+}
+
+.people-card:hover {
+	cursor: pointer;
 }

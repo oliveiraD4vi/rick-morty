@@ -20,13 +20,7 @@ function App() {
           </div>
 
           <div className="lateral-showcase-container">
-            <div className="lateral-showcase">
               <PeopleShowcase />
-            </div>
-
-            <div className="element">
-              <span>by me</span>
-            </div>
           </div>
         </div>
       </PageProvider>      

@@ -6,9 +6,13 @@
 	height: 100%;
 
 	.people-info-showcase {
+		position: relative;
+		top: 25%;
+		left: 12%;
 		width: 60%;
 		height: 75%;
-		border: 1px solid var(--black-700);
+		border: 2px solid var(--black-700);
+		background-color: var(--white-900);
 	
 		.header {
 			display: flex;
@@ -17,7 +21,7 @@
 			width: 100%;
 			height: 8%;
 			padding: 0px 20px;
-			border-bottom: 1px solid var(--black-700);
+			border-bottom: 2px solid var(--black-700);
 			background-color: var(--yellow-500);
 
 			.anticon {
@@ -37,7 +41,7 @@
 				align-items: center;
 				width: 50%;
 				height: 100%;
-				border-right: 1px solid var(--black-700);
+				border-right: 2px solid var(--black-700);
 				
 				.content-avatar {
 					img {
@@ -56,7 +60,7 @@
 
 				.content-name {
 					margin-bottom: 20px;
-					border-bottom: 1px solid var(--black-700);
+					border-bottom: 2px solid var(--black-700);
 
 					h3 {
 						font-size: 30px;

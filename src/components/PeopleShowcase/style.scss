@@ -16,10 +16,14 @@
 		margin-top: 10px;
 
 		.page-next {
-			padding: 5px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 30px;
+			height: 30px;
 			color: var(--white-900);
 			background-color: var(--black-700);
-			border-radius: 5px;
+			border-radius: 50%;
 		}
 
 		.page-next:hover {
@@ -27,10 +31,14 @@
 		}
 
 		.page-previous {
-			padding: 5px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 30px;
+			height: 30px;
 			color: var(--white-900);
 			background-color: var(--black-700);
-			border-radius: 5px;
+			border-radius: 50%;
 		}
 
 		.page-previous:hover {
