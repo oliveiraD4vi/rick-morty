@@ -20,6 +20,27 @@
 			padding: 20px;
 			border: 1px solid var(--black-700);
 			background-color: var(--white-900);
+
+			.identifier {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				position: absolute;
+				top: 50px;
+				left: 80px;
+				width: 70%;
+				border-bottom: 2px solid var(--black-700);
+
+				h1 {
+					font-size: 70px;
+					margin: 0px;
+				}
+
+				.anticon {
+					margin: 0px 50px;
+					font-size: 20px;
+				}
+			}
 		}
 
 		.base {

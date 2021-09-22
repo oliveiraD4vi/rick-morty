@@ -4,8 +4,9 @@
 	width: 150px;
 	height: 150px;
 	border-radius: 5px;
-	background-color: var(--black-700);
 	margin: 5px;
+	background-color: var(--black-700);
+	transition: all 0.3s ease-in-out;
 
 	img {
 		width: 25px;
@@ -23,4 +24,5 @@
 
 .people-card:hover {
 	cursor: pointer;
+	background-color: var(--black-500);
 }
