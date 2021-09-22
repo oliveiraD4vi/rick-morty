@@ -1,0 +1,19 @@
+.people-lateral-showcase::-webkit-scrollbar {
+	width: 10px;
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+.people-lateral-showcase::-webkit-scrollbar-thumb {
+	background-color: var(--black-700);
+	border-radius: 5px;
+}
+
+.people-lateral-showcase {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	height: 95%;
+	padding: 5px;
+	overflow-y: scroll;
+}
