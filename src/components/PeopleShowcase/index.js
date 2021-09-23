@@ -36,6 +36,10 @@ export default function PeopleShowcase() {
 				<div className="page-previous" onClick={() => setPageNumber('p')}>
 					<LeftOutlined />
 				</div>
+
+				<div className="page-number">
+					<h4>{page}</h4>
+				</div>
 				
 				<div className="page-next" onClick={() => setPageNumber('n')}>
 					<RightOutlined />
