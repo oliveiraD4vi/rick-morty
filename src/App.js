@@ -5,31 +5,34 @@ import { MenuOutlined } from '@ant-design/icons/lib/icons';
 
 import { PeopleInfoProvider } from './context/PeopleContext';
 import { PageProvider } from './context/PageContext';
+import { SearchValueProvider } from './context/SearchValueContext';
 
 import './styles/global.scss';
 
 function App() {
   return (
     <PeopleInfoProvider>
-      <PageProvider>
-        <div className="App">
-          <div className="base-container">
-            <div className="base-showcase">
-              <div className="identifier">
-                <h1>Rick and Morty</h1>
-                <MenuOutlined />
+      <SearchValueProvider>
+        <PageProvider>
+          <div className="App">
+            <div className="base-container">
+              <div className="base-showcase">
+                <div className="identifier">
+                  <h1>Rick and Morty</h1>
+                  <MenuOutlined />
+                </div>
+                <PeopleInfoShowcase />
               </div>
-              <PeopleInfoShowcase />
+
+              <div className="base"></div>
             </div>
 
-            <div className="base"></div>
+            <div className="lateral-showcase-container">
+                <PeopleShowcase />
+            </div>
           </div>
-
-          <div className="lateral-showcase-container">
-              <PeopleShowcase />
-          </div>
-        </div>
-      </PageProvider>      
+        </PageProvider>      
+      </SearchValueProvider>
     </PeopleInfoProvider>
   );
 }
