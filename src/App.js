@@ -18,7 +18,7 @@ function App() {
             <div className="base-container">
               <div className="base-showcase">
                 <div className="identifier">
-                  <h1>Rick and Morty</h1>
+                  <h1>Rick and Morty Characters</h1>
                   <MenuOutlined />
                 </div>
                 <PeopleInfoShowcase />
