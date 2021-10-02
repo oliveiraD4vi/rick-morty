@@ -1,6 +1,7 @@
 import PeopleShowcase from './components/PeopleShowcase';
 import PeopleInfoShowcase from './components/PeopleInfoShowcase';
 
+import { Tooltip } from 'antd';
 import { MenuOutlined } from '@ant-design/icons/lib/icons';
 
 import { PeopleInfoProvider } from './context/PeopleContext';
@@ -19,7 +20,9 @@ function App() {
               <div className="base-showcase">
                 <div className="identifier">
                   <h1>Rick and Morty Characters</h1>
-                  <MenuOutlined />
+                  <Tooltip title="Esse será um futuro menu">
+                    <MenuOutlined />
+                  </Tooltip>
                 </div>
                 <PeopleInfoShowcase />
               </div>
