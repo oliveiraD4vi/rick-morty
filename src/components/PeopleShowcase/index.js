@@ -27,9 +27,9 @@ export default function PeopleShowcase() {
       </div>
 
 			<div className="people-page">
-				<a className="page-previous" onClick={() => previous()}><LeftOutlined /></a>
+				<button className="page-previous" onClick={() => previous()}><LeftOutlined /></button>
 				<h4 className="page-number">{page}</h4>
-				<a className="page-next" onClick={() => next()}><RightOutlined /></a>
+				<button className="page-next" onClick={() => next()}><RightOutlined /></button>
 			</div>
 		</div>
 	);
