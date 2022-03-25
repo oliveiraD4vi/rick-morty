@@ -30,7 +30,9 @@ export default function PeopleShowcase() {
 		<div className="people-showcase">
 			<Search />
 
-			<LateralShowcase />
+      <div className="showcase-content">
+			  <LateralShowcase />
+      </div>
 
 			<div className="people-page">
 				<div className="page-previous" onClick={() => setPageNumber('p')}>
