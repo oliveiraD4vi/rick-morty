@@ -45,7 +45,9 @@
 				border-right: 2px solid var(--black-700);
 				
 				.content-avatar {
+          width: 70%;
 					img {
+            width: 100%;
 						border-radius: 50%;
 						border: 1px solid var(--black-700);
 					}
@@ -86,4 +88,110 @@
 			}
 		}
 	}
+}
+
+@media screen and (max-width: 1200px) {
+  .people-info-showcase {
+    .content {
+      .content-right {
+        .content-name {
+          h3 {
+            font-size: 28px !important;
+          }
+        }
+
+        .content-info {
+          h4 {
+            font-size: 14px !important;
+          }
+
+          h5 {
+            margin-top: 16px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .people-info-showcase {
+    .content {
+      .content-right {
+        padding: 25px !important;
+
+        .content-name {
+          margin-bottom: 15px !important;
+
+          h3 {
+            font-size: 24px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .people-info-showcase {
+    border-width: 1px !important;
+  
+    .header {
+      padding: 0px 10px !important;
+      border-width: 1px !important;
+    }
+
+    .content {
+      .content-left {
+        border-width: 1px !important;
+      }
+
+      .content-right {
+        padding: 15px !important;
+
+        .content-name {
+          margin-bottom: 12px !important;
+          border-width: 1px !important;
+
+          h3 {
+            font-size: 20px !important;
+          }
+        }
+
+        .content-info {
+          h4 {
+            font-size: 12px !important;
+          }
+
+          h5 {
+            margin-top: 10px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .people-info-showcase {
+    .content {
+      .content-right {
+        padding: 10px !important;
+
+        .content-name {
+          margin-bottom: 10px !important;
+
+          h3 {
+            font-size: 15px !important;
+          }
+        }
+
+        .content-info {
+          h4 {
+            font-size: 10px !important;
+          }
+        }
+      }
+    }
+  }
 }
