@@ -1,9 +1,6 @@
 import PeopleShowcase from './components/PeopleShowcase';
 import PeopleInfoShowcase from './components/PeopleInfoShowcase';
 
-import { Tooltip } from 'antd';
-import { MenuOutlined } from '@ant-design/icons/lib/icons';
-
 import { PeopleInfoProvider } from './context/PeopleContext';
 import { PageProvider } from './context/PageContext';
 import { SearchValueProvider } from './context/SearchValueContext';

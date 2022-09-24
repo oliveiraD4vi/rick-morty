@@ -16,8 +16,7 @@ export default function Search() {
 				<Search 
 					placeholder="character search"
 					allowClear 
-					onSearch={onSearch} 
-					style={{ width: 200 }}
+					onSearch={onSearch}
 				/>
 			</Space>
 		</div>

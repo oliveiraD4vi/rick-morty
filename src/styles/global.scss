@@ -53,6 +53,7 @@
 	}
 
 	.lateral-showcase-container {
+    min-width: 250px;
 		width: 20%;
 		height: 100%;
 		padding: 20px;
@@ -94,6 +95,7 @@
     }
 
     .lateral-showcase-container {
+      min-width: 200px;
       padding: 15px;
     }
   }
@@ -120,6 +122,7 @@
     }
 
     .lateral-showcase-container {
+      min-width: 180px !important;
       padding: 10px;
     }
   }
@@ -135,6 +138,9 @@
           }
         }
       }
+    }
+    .lateral-showcase-container {
+      min-width: 150px !important;
     }
   }
 }

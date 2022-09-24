@@ -64,17 +64,78 @@
 }
 
 @media screen and (max-width: 1200px) {
+  .people-page {
+    padding: 15px !important;
 
+    .page-previous,
+    .page-next {
+      width: 25px !important;
+      height: 25px !important;
+    }
+
+    .page-number {
+      width: 25px !important;
+      height: 25px !important;
+    }
+  }
 }
 
 @media screen and (max-width: 1024px) {
-  
+  .people-page {
+    padding: 12px !important;
+    margin-top: 5px !important;
+
+    .page-previous,
+    .page-next {
+      width: 20px !important;
+      height: 20px !important;
+    }
+
+    .page-number {
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
-  
+  .people-page {
+    padding: 10px !important;
+
+    .page-previous,
+    .page-next {
+      width: 15px !important;
+      height: 15px !important;
+    }
+
+    .page-next {
+      border-width: 1px !important;
+    }
+
+    .page-previous {
+      border-width: 1px !important;
+    }
+
+    .page-number {
+      width: 15px !important;
+      height: 15px !important;
+    }
+  }
 }
 
 @media screen and (max-width: 375px) {
-  
+  .people-page {
+    padding: 8px !important;
+
+    .page-previous,
+    .page-next {
+      width: 10px !important;
+      height: 10px !important;
+    }
+
+    .page-number {
+      width: 10px !important;
+      height: 10px !important;
+    }
+  }
 }

@@ -5,7 +5,11 @@
 	width: 100%;
 	height: 5%;
 	margin-bottom: 10px;
-	
+  
+  .ant-space {
+    width: 100% !important;
+  }
+
 	.ant-input {
 		color: var(--white-900) !important;
 		background-color: transparent !important;
@@ -40,17 +44,13 @@
 }
 
 @media screen and (max-width: 1200px) {
-
-}
-
-@media screen and (max-width: 1024px) {
-  
+  .people-search {
+    margin-bottom: 10px;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  
-}
-
-@media screen and (max-width: 375px) {
-  
+  .people-search {
+    margin-bottom: 5px;
+  }
 }
