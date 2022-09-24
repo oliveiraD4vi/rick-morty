@@ -26,9 +26,9 @@
 				justify-content: space-between;
 				align-items: center;
 				position: absolute;
-				top: 50px;
-				left: 80px;
-				width: 70%;
+        top: 5%;
+        left: 5%;
+        width: 60%;
 				border-bottom: 2px solid var(--black-700);
 
 				h1 {
@@ -59,4 +59,82 @@
 		border: 1px solid var(--black-700);
 		background-color: var(--yellow-500);
 	}
+}
+
+@media screen and (max-width: 1200px) {
+  .App {
+    .base-container {
+      .base-showcase {
+        .identifier {
+          h1 {
+            font-size: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .App {
+    .base-container {
+      .base-showcase {
+        padding: 15px;
+
+        .identifier {
+          h1 {
+            font-size: 40px !important;
+          }
+        }
+      }
+
+      .base {
+        padding: 15px;
+      }
+    }
+
+    .lateral-showcase-container {
+      padding: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .App {
+    .base-container {
+      .base-showcase {
+        padding: 10px;
+
+        .identifier {
+          border-width: 1px !important;
+
+          h1 {
+            font-size: 30px !important;
+          }
+        }
+      }
+
+      .base {
+        padding: 10px;
+      }
+    }
+
+    .lateral-showcase-container {
+      padding: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .App {
+    .base-container {
+      .base-showcase {
+        .identifier {
+          h1 {
+            font-size: 15px !important;
+          }
+        }
+      }
+    }
+  }
 }

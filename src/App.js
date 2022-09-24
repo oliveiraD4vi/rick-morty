@@ -20,9 +20,6 @@ function App() {
               <div className="base-showcase">
                 <div className="identifier">
                   <h1>Rick and Morty Characters</h1>
-                  <Tooltip title="Esse será um futuro menu">
-                    <MenuOutlined />
-                  </Tooltip>
                 </div>
                 <PeopleInfoShowcase />
               </div>
