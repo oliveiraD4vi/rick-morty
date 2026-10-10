@@ -1,21 +1,41 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CardSkeleton, CharacterCard } from "./components/CharacterCard";
 import { DetailDialog } from "./components/DetailDialog";
 import { EpisodesView } from "./components/EpisodesView";
 import { LocationsView } from "./components/LocationsView";
 import { Toolbar } from "./components/Toolbar";
+import { I18nContext, STRINGS, initialLang, makeLabels, saveLang, type Lang } from "./i18n";
 import { useCharacters } from "./useCharacters";
 import { useUrlState, type Tab } from "./useUrlState";
 
-const number = new Intl.NumberFormat("pt-BR");
-
-const TABS: { id: Tab; label: string }[] = [
-  { id: "personagens", label: "Personagens" },
-  { id: "episodios", label: "Episódios" },
-  { id: "locais", label: "Locais" },
-];
+const TABS: Tab[] = ["personagens", "episodios", "locais"];
 
 export function App() {
+  const [lang, setLangState] = useState<Lang>(initialLang);
+  const i18n = useMemo(
+    () => ({
+      lang,
+      t: STRINGS[lang],
+      l: makeLabels(lang),
+      setLang: (next: Lang) => {
+        saveLang(next);
+        setLangState(next);
+        // Mantém a URL coerente quando a página veio com ?lang= do portfólio.
+        const url = new URL(location.href);
+        if (url.searchParams.has("lang")) {
+          url.searchParams.set("lang", next);
+          history.replaceState(history.state, "", url);
+        }
+      },
+    }),
+    [lang],
+  );
+  const { t, l } = i18n;
+  useEffect(() => {
+    document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
+    document.title = t.title;
+  }, [lang, t]);
+
   const { tab, filters, selected, setTab, setFilters, open, close } = useUrlState();
   const { catalog, items, count, loading, error, hasMore, loadMore, retry } = useCharacters(filters);
 
@@ -36,29 +56,42 @@ export function App() {
   };
 
   return (
-    <>
-      <header className="hero">
+    <I18nContext.Provider value={i18n}>
+      <header className="top wrap">
+        <span className="brand">
+          <span className="portal" aria-hidden="true" />
+          Rick and Morty
+        </span>
+        <div className="lang" role="group" aria-label={t.language}>
+          {(["pt", "en"] as Lang[]).map((code) => (
+            <button key={code} type="button" aria-pressed={lang === code} onClick={() => i18n.setLang(code)} lang={code === "pt" ? "pt-BR" : "en"}>
+              {code.toUpperCase()}
+            </button>
+          ))}
+        </div>
+      </header>
+
+      <section className="hero">
         <div className="wrap">
-          <p className="eyebrow">Guia da série</p>
+          <p className="eyebrow">{t.eyebrow}</p>
           <h1>Rick and Morty</h1>
           <p className="lead">
-            Personagens, episódios e lugares da série, todos ligados entre si: veja quem aparece em cada episódio e quem
-            mora em cada planeta. Dados da{" "}
+            {t.lead}{" "}
             <a href="https://rickandmortyapi.com" target="_blank" rel="noopener">
               Rick and Morty API
             </a>
             .
           </p>
         </div>
-      </header>
+      </section>
 
       <div className="sticky">
         <div className="wrap">
-          <nav className="tabs" aria-label="Seções">
-            {TABS.map((t) => (
-              <button key={t.id} type="button" aria-current={tab === t.id ? "page" : undefined} onClick={() => setTab(t.id)}>
-                {t.label}
-                {totals && <span>{number.format(totals[t.id])}</span>}
+          <nav className="tabs" aria-label={t.sections}>
+            {TABS.map((id) => (
+              <button key={id} type="button" aria-current={tab === id ? "page" : undefined} onClick={() => setTab(id)}>
+                {t.tabs[id]}
+                {totals && <span>{l.number(totals[id])}</span>}
               </button>
             ))}
           </nav>
@@ -69,10 +102,10 @@ export function App() {
       <main className="wrap" id="conteudo">
         {error && (
           <div className="empty">
-            <h2>Não foi possível carregar</h2>
-            <p>{error}</p>
+            <h2>{t.loadError}</h2>
+            <p>{t.loadErrorHint}</p>
             <button type="button" className="button" onClick={retry}>
-              Tentar de novo
+              {t.retry}
             </button>
           </div>
         )}
@@ -80,12 +113,12 @@ export function App() {
         {tab === "personagens" && (
           <>
             <p className="count" aria-live="polite">
-              {loading ? "Carregando personagens…" : count > 0 ? `${number.format(count)} ${count === 1 ? "personagem" : "personagens"}` : ""}
+              {loading ? t.loadingCharacters : count > 0 ? t.characters(l.number(count), count) : ""}
             </p>
             {!loading && !error && count === 0 && (
               <div className="empty">
-                <h2>Nenhum personagem encontrado</h2>
-                <p>Tente outro nome ou remova algum filtro.</p>
+                <h2>{t.noCharacters}</h2>
+                <p>{t.noCharactersHint}</p>
               </div>
             )}
             <ul className="grid">
@@ -98,7 +131,7 @@ export function App() {
             {hasMore && (
               <div className="more">
                 <button type="button" className="button" onClick={loadMore}>
-                  Carregar mais
+                  {t.loadMore}
                 </button>
               </div>
             )}
@@ -107,23 +140,23 @@ export function App() {
 
         {tab === "episodios" && catalog && <EpisodesView catalog={catalog} onOpen={open} />}
         {tab === "locais" && catalog && <LocationsView catalog={catalog} onOpen={open} />}
-        {tab !== "personagens" && loading && <p className="count">Carregando…</p>}
+        {tab !== "personagens" && loading && <p className="count">{t.loading}</p>}
       </main>
 
       <footer className="footer">
         <div className="wrap">
-          Feito por{" "}
-          <a href="https://coaladev.com.br" target="_blank" rel="noopener">
+          {t.madeBy}{" "}
+          <a href={lang === "pt" ? "https://coaladev.com.br" : "https://coaladev.com.br/en/"} target="_blank" rel="noopener">
             Davi Oliveira
           </a>{" "}
           ·{" "}
           <a href="https://github.com/oliveiraD4vi/rick-morty" target="_blank" rel="noopener">
-            Código no GitHub
+            {t.code}
           </a>
         </div>
       </footer>
 
       {selected && catalog && <DetailDialog selected={selected} catalog={catalog} onOpen={open} onClose={close} />}
-    </>
+    </I18nContext.Provider>
   );
 }

@@ -35,6 +35,9 @@ function read(): UrlState {
 
 function toUrl({ tab, filters, selected }: UrlState) {
   const params = new URLSearchParams();
+  // O idioma vindo do portfólio (?lang=) acompanha a navegação.
+  const lang = new URLSearchParams(location.search).get("lang");
+  if (lang) params.set("lang", lang);
   if (tab !== "personagens") params.set("aba", tab);
   for (const [field, key] of Object.entries(KEYS) as [keyof Filters, string][]) if (filters[field]) params.set(key, filters[field]);
   if (selected) params.set(selected.kind, String(selected.id));

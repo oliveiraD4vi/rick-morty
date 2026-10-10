@@ -1,5 +1,5 @@
 import type { Character } from "../data";
-import { GENDER, SPECIES, STATUS, label, place } from "../labels";
+import { useI18n } from "../i18n";
 import { Avatar } from "./Avatar";
 
 interface Props {
@@ -8,25 +8,26 @@ interface Props {
 }
 
 export function CharacterCard({ character: c, onOpen }: Props) {
+  const { t, l } = useI18n();
   return (
     <li className="card">
-      <button type="button" className="card-button" onClick={() => onOpen(c.id)} aria-label={`Ver detalhes de ${c.name}`}>
+      <button type="button" className="card-button" onClick={() => onOpen(c.id)} aria-label={t.details(c.name)}>
         <div className="card-image">
           <Avatar id={c.id} name={c.name} size={300} />
-          <span className={`status status-${c.status.toLowerCase()}`}>{label(STATUS, c.status)}</span>
+          <span className={`status status-${c.status.toLowerCase()}`}>{l.label("status", c.status)}</span>
         </div>
         <div className="card-body">
           <h3>{c.name}</h3>
           <p className="card-meta">
-            {label(SPECIES, c.species)} · {label(GENDER, c.gender)}
+            {l.label("species", c.species)} · {l.label("gender", c.gender)}
           </p>
           <dl>
             <div>
-              <dt>Última localização</dt>
-              <dd>{place(c.location.name)}</dd>
+              <dt>{t.lastLocation}</dt>
+              <dd>{l.place(c.location.name)}</dd>
             </div>
             <div>
-              <dt>Episódios</dt>
+              <dt>{t.episodes}</dt>
               <dd>{c.episodes.length}</dd>
             </div>
           </dl>

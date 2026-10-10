@@ -11,7 +11,7 @@ export function useCharacters(filters: Filters) {
 
   const load = useCallback(() => {
     setError(null);
-    loadCatalog().then(setCatalog, () => setError("Verifique sua conexão e tente de novo."));
+    loadCatalog().then(setCatalog, () => setError("load"));
   }, []);
   useEffect(() => {
     load();

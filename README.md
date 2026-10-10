@@ -1,6 +1,7 @@
-# Rick and Morty · Guia de personagens
+# Rick and Morty · Guia da série
 
-Guia da série com personagens, episódios e locais, todos ligados entre si:
+Guia da série em **português e inglês** (`?lang=pt` ou `?lang=en` na URL), com personagens,
+episódios e locais, todos ligados entre si:
 
 - **Personagens:** busca por nome, filtros por situação, espécie e gênero, e rolagem infinita.
 - **Episódios:** agrupados por temporada, com o elenco de cada um.

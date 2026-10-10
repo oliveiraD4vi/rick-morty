@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { seasonOf, type Catalog } from "../data";
+import { useI18n } from "../i18n";
 import type { Selected } from "../useUrlState";
 import { Avatar } from "./Avatar";
 import { EpisodeRow } from "./DetailDialog";
@@ -11,6 +12,7 @@ interface Props {
 
 /** Episódios agrupados por temporada, com o elenco de cada um. */
 export function EpisodesView({ catalog, onOpen }: Props) {
+  const { t } = useI18n();
   const seasons = useMemo(() => {
     const map = new Map<number, typeof catalog.episodeList>();
     for (const ep of catalog.episodeList) {
@@ -23,13 +25,13 @@ export function EpisodesView({ catalog, onOpen }: Props) {
 
   return (
     <>
-      <div className="chips" role="group" aria-label="Temporada">
+      <div className="chips" role="group" aria-label={t.seasonFilter}>
         <button type="button" aria-pressed={season === null} onClick={() => setSeason(null)}>
-          Todas
+          {t.allSeasons}
         </button>
         {seasons.map(([n]) => (
           <button key={n} type="button" aria-pressed={season === n} onClick={() => setSeason(n)}>
-            Temporada {n}
+            {t.season(n)}
           </button>
         ))}
       </div>
@@ -39,7 +41,7 @@ export function EpisodesView({ catalog, onOpen }: Props) {
         .map(([n, episodes]) => (
           <section key={n} className="season" aria-labelledby={`season-${n}`}>
             <h2 id={`season-${n}`}>
-              Temporada {n} <span>{episodes.length} episódios</span>
+              {t.season(n)} <span>{t.seasonEpisodes(episodes.length)}</span>
             </h2>
             <ol className="episode-list">
               {episodes.map((ep) => (
@@ -60,9 +62,10 @@ export function EpisodesView({ catalog, onOpen }: Props) {
 
 /** Alguns rostos e o total, para dar uma ideia do elenco. */
 export function Faces({ ids, total, catalog }: { ids: number[]; total: number; catalog: Catalog }) {
+  const { t } = useI18n();
   const shown = ids.slice(0, 4).flatMap((id) => catalog.byId.get(id) ?? []);
   return (
-    <span className="faces" aria-label={`${total} personagens`}>
+    <span className="faces" aria-label={t.faces(total)}>
       {shown.map((c) => (
         <span key={c.id} className="face">
           <Avatar key={c.id} id={c.id} name={c.name} size={40} />
