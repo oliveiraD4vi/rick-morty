@@ -1,4 +1,4 @@
-// Baixa todos os personagens e episódios da Rick and Morty API para src/data/snapshot.json.
+// Baixa todos os personagens, episódios e locais da Rick and Morty API para src/data/snapshot.json.
 // A API limita rajadas de requisições, então o script vai devagar e tenta de novo após um 429.
 // Uso: npm run snapshot
 import { writeFile } from "node:fs/promises";
@@ -33,7 +33,8 @@ async function all(resource) {
   return items;
 }
 
-const idOf = (url) => Number(url.split("/").pop());
+const idOf = (url) => (url ? Number(url.split("/").pop()) : null);
+const place = (p) => ({ name: p.name, id: idOf(p.url) });
 
 const characters = (await all("character")).map((c) => ({
   id: c.id,
@@ -42,12 +43,26 @@ const characters = (await all("character")).map((c) => ({
   species: c.species,
   type: c.type,
   gender: c.gender,
-  origin: c.origin.name,
-  location: c.location.name,
+  origin: place(c.origin),
+  location: place(c.location),
   episodes: c.episode.map(idOf),
 }));
 
-const episodes = (await all("episode")).map((e) => ({ id: e.id, name: e.name, air_date: e.air_date, code: e.episode }));
+const episodes = (await all("episode")).map((e) => ({
+  id: e.id,
+  name: e.name,
+  air_date: e.air_date,
+  code: e.episode,
+  characters: e.characters.map(idOf),
+}));
 
-await writeFile(OUT, JSON.stringify({ fetchedAt: new Date().toISOString(), characters, episodes }));
-console.log(`ok: ${characters.length} personagens e ${episodes.length} episódios`);
+const locations = (await all("location")).map((l) => ({
+  id: l.id,
+  name: l.name,
+  type: l.type,
+  dimension: l.dimension,
+  residents: l.residents.map(idOf),
+}));
+
+await writeFile(OUT, JSON.stringify({ fetchedAt: new Date().toISOString(), characters, episodes, locations }));
+console.log(`ok: ${characters.length} personagens, ${episodes.length} episódios e ${locations.length} locais`);

@@ -23,7 +23,7 @@ export function CharacterCard({ character: c, onOpen }: Props) {
           <dl>
             <div>
               <dt>Última localização</dt>
-              <dd>{place(c.location)}</dd>
+              <dd>{place(c.location.name)}</dd>
             </div>
             <div>
               <dt>Episódios</dt>

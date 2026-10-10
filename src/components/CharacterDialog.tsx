@@ -66,11 +66,11 @@ export function CharacterDialog({ id, catalog, onClose }: Props) {
                   </div>
                   <div>
                     <dt>Origem</dt>
-                    <dd>{place(character.origin)}</dd>
+                    <dd>{place(character.origin.name)}</dd>
                   </div>
                   <div>
                     <dt>Última localização</dt>
-                    <dd>{place(character.location)}</dd>
+                    <dd>{place(character.location.name)}</dd>
                   </div>
                 </dl>
               </div>
