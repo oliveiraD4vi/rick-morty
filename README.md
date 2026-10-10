@@ -30,8 +30,8 @@ npm run dev       # http://localhost:5173
 npm run build     # gera dist/
 ```
 
-Com Docker (as imagens em `/avatar/` dependem do proxy da frente, veja o deploy em
-[coaladev.com.br](https://github.com/oliveiraD4vi/me)):
+Com Docker (em produção, as imagens em `/avatar/` são servidas por um proxy na frente do
+container, que guarda em cache as da API):
 
 ```bash
 docker build -t rick-morty .
