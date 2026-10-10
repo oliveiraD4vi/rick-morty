@@ -17,10 +17,13 @@ export function useCharacters(filters: Filters) {
     load();
   }, [load]);
 
-  const matches = useMemo(() => (catalog ? filterCharacters(catalog.characters, filters) : []), [catalog, filters]);
+  // Compara pelos valores: abrir e fechar um detalhe relê a URL e gera outro objeto com os mesmos
+  // filtros, e voltar a 24 itens nessa hora encolhia a página e jogava a rolagem para o fim.
+  const key = JSON.stringify(filters);
+  const matches = useMemo(() => (catalog ? filterCharacters(catalog.characters, filters) : []), [catalog, key]);
   useEffect(() => {
     setVisible(PAGE);
-  }, [filters]);
+  }, [key]);
 
   const hasMore = visible < matches.length;
   const loadMore = useCallback(() => setVisible((v) => v + PAGE), []);

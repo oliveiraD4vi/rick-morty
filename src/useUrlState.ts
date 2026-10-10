@@ -57,7 +57,16 @@ export function useUrlState() {
   }, []);
 
   useEffect(() => {
-    const onPop = () => setState(read());
+    // Os detalhes abrem num diálogo, sem mexer na rolagem da página; o navegador não deve
+    // tentar restaurá-la ao voltar no histórico.
+    history.scrollRestoration = "manual";
+    const onPop = () => {
+      const next = read();
+      // Mantém o mesmo objeto de filtros quando nada mudou, para a lista não ser refeita.
+      const prev = current.current.filters;
+      if (JSON.stringify(prev) === JSON.stringify(next.filters)) next.filters = prev;
+      setState(next);
+    };
     addEventListener("popstate", onPop);
     return () => removeEventListener("popstate", onPop);
   }, [setState]);
