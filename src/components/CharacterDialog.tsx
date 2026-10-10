@@ -1,39 +1,22 @@
-import { useEffect, useRef, useState } from "react";
-import { fetchCharacter, fetchEpisodes, type Character, type Episode } from "../api";
+import { useEffect, useRef } from "react";
+import type { Catalog } from "../data";
 import { GENDER, SPECIES, STATUS, label, place } from "../labels";
+import { Avatar } from "./Avatar";
 
 interface Props {
   id: number;
-  /** Personagem já carregado na lista, para abrir sem esperar a API. */
-  initial?: Character;
+  catalog: Catalog;
   onClose: () => void;
 }
 
-export function CharacterDialog({ id, initial, onClose }: Props) {
+export function CharacterDialog({ id, catalog, onClose }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
-  const [character, setCharacter] = useState<Character | null>(initial ?? null);
-  const [episodes, setEpisodes] = useState<Episode[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const character = catalog.byId.get(id);
+  const episodes = character?.episodes.flatMap((e) => catalog.episodes.get(e) ?? []) ?? [];
 
   useEffect(() => {
     dialog.current?.showModal();
   }, []);
-
-  useEffect(() => {
-    const ctrl = new AbortController();
-    setError(null);
-    setEpisodes(null);
-    (async () => {
-      try {
-        const c = initial?.id === id ? initial : await fetchCharacter(id, ctrl.signal);
-        setCharacter(c);
-        setEpisodes(await fetchEpisodes(c.episode, ctrl.signal));
-      } catch (err) {
-        if (!ctrl.signal.aborted) setError(err instanceof Error ? err.message : "Erro desconhecido");
-      }
-    })();
-    return () => ctrl.abort();
-  }, [id, initial]);
 
   return (
     <dialog
@@ -56,13 +39,16 @@ export function CharacterDialog({ id, initial, onClose }: Props) {
           </svg>
         </button>
 
-        {!character && !error && <p className="dialog-loading">Carregando…</p>}
-        {error && !character && <p className="dialog-loading">Não foi possível carregar o personagem.</p>}
-
-        {character && (
+        {!character ? (
+          <p className="dialog-loading" id="dialog-title">
+            Personagem não encontrado.
+          </p>
+        ) : (
           <>
             <header className="dialog-head">
-              <img src={character.image} alt={character.name} width="300" height="300" />
+              <div className="dialog-image">
+                <Avatar id={character.id} name={character.name} size={300} alt={character.name} lazy={false} />
+              </div>
               <div>
                 <span className={`status status-${character.status.toLowerCase()}`}>{label(STATUS, character.status)}</span>
                 <h2 id="dialog-title">{character.name}</h2>
@@ -80,11 +66,11 @@ export function CharacterDialog({ id, initial, onClose }: Props) {
                   </div>
                   <div>
                     <dt>Origem</dt>
-                    <dd>{place(character.origin.name)}</dd>
+                    <dd>{place(character.origin)}</dd>
                   </div>
                   <div>
                     <dt>Última localização</dt>
-                    <dd>{place(character.location.name)}</dd>
+                    <dd>{place(character.location)}</dd>
                   </div>
                 </dl>
               </div>
@@ -92,21 +78,17 @@ export function CharacterDialog({ id, initial, onClose }: Props) {
 
             <section className="episodes" aria-labelledby="episodes-title">
               <h3 id="episodes-title">
-                Episódios <span>{character.episode.length}</span>
+                Episódios <span>{episodes.length}</span>
               </h3>
-              {error && <p className="muted">Não foi possível carregar os episódios.</p>}
-              {!episodes && !error && <p className="muted">Carregando episódios…</p>}
-              {episodes && (
-                <ol>
-                  {episodes.map((ep) => (
-                    <li key={ep.id}>
-                      <code>{ep.episode}</code>
-                      <span>{ep.name}</span>
-                      <time>{formatDate(ep.air_date)}</time>
-                    </li>
-                  ))}
-                </ol>
-              )}
+              <ol>
+                {episodes.map((ep) => (
+                  <li key={ep.id}>
+                    <code>{ep.code}</code>
+                    <span>{ep.name}</span>
+                    <time>{formatDate(ep.air_date)}</time>
+                  </li>
+                ))}
+              </ol>
             </section>
           </>
         )}

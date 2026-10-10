@@ -1,5 +1,6 @@
-import type { Character } from "../api";
+import type { Character } from "../data";
 import { GENDER, SPECIES, STATUS, label, place } from "../labels";
+import { Avatar } from "./Avatar";
 
 interface Props {
   character: Character;
@@ -11,7 +12,7 @@ export function CharacterCard({ character: c, onOpen }: Props) {
     <li className="card">
       <button type="button" className="card-button" onClick={() => onOpen(c.id)} aria-label={`Ver detalhes de ${c.name}`}>
         <div className="card-image">
-          <img src={c.image} alt="" width="300" height="300" loading="lazy" decoding="async" />
+          <Avatar id={c.id} name={c.name} size={300} />
           <span className={`status status-${c.status.toLowerCase()}`}>{label(STATUS, c.status)}</span>
         </div>
         <div className="card-body">
@@ -22,11 +23,11 @@ export function CharacterCard({ character: c, onOpen }: Props) {
           <dl>
             <div>
               <dt>Última localização</dt>
-              <dd>{place(c.location.name)}</dd>
+              <dd>{place(c.location)}</dd>
             </div>
             <div>
               <dt>Episódios</dt>
-              <dd>{c.episode.length}</dd>
+              <dd>{c.episodes.length}</dd>
             </div>
           </dl>
         </div>

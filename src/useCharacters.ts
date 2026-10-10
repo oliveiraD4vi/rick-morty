@@ -1,60 +1,34 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { fetchCharacters, type Character, type Filters } from "./api";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { filterCharacters, loadCatalog, type Catalog, type Filters } from "./data";
 
-interface State {
-  items: Character[];
-  count: number;
-  pages: number;
-  page: number;
-  loading: boolean;
-  error: string | null;
-}
+const PAGE = 24;
 
-const INITIAL: State = { items: [], count: 0, pages: 0, page: 0, loading: true, error: null };
-
-/** Lista paginada de personagens: recomeça quando os filtros mudam e acumula as páginas seguintes. */
+/** Lista filtrada a partir da cópia local, exibida aos poucos conforme a rolagem. */
 export function useCharacters(filters: Filters) {
-  const [state, setState] = useState<State>(INITIAL);
-  const controller = useRef<AbortController | null>(null);
+  const [catalog, setCatalog] = useState<Catalog | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [visible, setVisible] = useState(PAGE);
 
-  const load = useCallback(
-    async (page: number) => {
-      controller.current?.abort();
-      const ctrl = new AbortController();
-      controller.current = ctrl;
-      setState((s) => ({ ...(page === 1 ? INITIAL : s), loading: true, error: null }));
-      try {
-        const data = await fetchCharacters(filters, page, ctrl.signal);
-        setState((s) => {
-          const base = page === 1 ? [] : s.items;
-          const seen = new Set(base.map((c) => c.id));
-          return {
-            items: [...base, ...data.results.filter((c) => !seen.has(c.id))],
-            count: data.count,
-            pages: data.pages,
-            page,
-            loading: false,
-            error: null,
-          };
-        });
-      } catch (err) {
-        if (ctrl.signal.aborted) return;
-        setState((s) => ({ ...s, loading: false, error: err instanceof Error ? err.message : "Erro desconhecido" }));
-      }
-    },
-    [filters],
-  );
+  const load = useCallback(() => {
+    setError(null);
+    loadCatalog().then(setCatalog, () => setError("Verifique sua conexão e tente de novo."));
+  }, []);
+  useEffect(load, [load]);
 
-  useEffect(() => {
-    load(1);
-    return () => controller.current?.abort();
-  }, [load]);
+  const matches = useMemo(() => (catalog ? filterCharacters(catalog.characters, filters) : []), [catalog, filters]);
+  useEffect(() => setVisible(PAGE), [filters]);
 
-  const hasMore = state.page < state.pages;
-  const loadMore = useCallback(() => {
-    if (!state.loading && hasMore) load(state.page + 1);
-  }, [state.loading, state.page, hasMore, load]);
-  const retry = useCallback(() => load(Math.max(1, state.page + (state.items.length ? 1 : 0))), [load, state.page, state.items.length]);
+  const hasMore = visible < matches.length;
+  const loadMore = useCallback(() => setVisible((v) => v + PAGE), []);
 
-  return { ...state, hasMore, loadMore, retry };
+  return {
+    catalog,
+    items: matches.slice(0, visible),
+    count: matches.length,
+    loading: !catalog && !error,
+    error,
+    hasMore,
+    loadMore,
+    retry: load,
+  };
 }

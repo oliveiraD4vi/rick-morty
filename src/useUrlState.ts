@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { EMPTY_FILTERS, type Filters } from "./api";
+import { EMPTY_FILTERS, type Filters } from "./data";
 
 // Filtros e personagem aberto ficam na URL para o link ser compartilhável.
 const KEYS: Record<keyof Filters, string> = { name: "busca", status: "status", species: "especie", gender: "genero" };

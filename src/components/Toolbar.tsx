@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EMPTY_FILTERS, type Filters } from "../api";
+import { EMPTY_FILTERS, type Filters } from "../data";
 import { GENDER, SPECIES, STATUS } from "../labels";
 
 interface Props {

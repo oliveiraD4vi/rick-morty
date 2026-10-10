@@ -9,19 +9,17 @@ const number = new Intl.NumberFormat("pt-BR");
 
 export function App() {
   const { filters, selected, setFilters, setSelected } = useUrlState();
-  const { items, count, loading, error, hasMore, loadMore, retry } = useCharacters(filters);
+  const { catalog, items, count, loading, error, hasMore, loadMore, retry } = useCharacters(filters);
 
   // Carrega a próxima página quando o fim da lista aparece na tela.
   const sentinel = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = sentinel.current;
     if (!el || !hasMore) return;
-    const observer = new IntersectionObserver((entries) => entries[0].isIntersecting && loadMore(), { rootMargin: "600px" });
+    const observer = new IntersectionObserver((entries) => entries[0].isIntersecting && loadMore(), { rootMargin: "800px" });
     observer.observe(el);
     return () => observer.disconnect();
   }, [hasMore, loadMore]);
-
-  const firstLoad = loading && items.length === 0;
 
   return (
     <>
@@ -47,7 +45,7 @@ export function App() {
 
       <main className="wrap" id="conteudo">
         <p className="count" aria-live="polite">
-          {firstLoad ? "Buscando personagens…" : count > 0 ? `${number.format(count)} personagens` : ""}
+          {loading ? "Carregando personagens…" : count > 0 ? `${number.format(count)} ${count === 1 ? "personagem" : "personagens"}` : ""}
         </p>
 
         {!loading && !error && count === 0 && (
@@ -61,7 +59,7 @@ export function App() {
           {items.map((c) => (
             <CharacterCard key={c.id} character={c} onOpen={setSelected} />
           ))}
-          {loading && Array.from({ length: firstLoad ? 12 : 4 }, (_, i) => <CardSkeleton key={`s${i}`} />)}
+          {loading && Array.from({ length: 12 }, (_, i) => <CardSkeleton key={`s${i}`} />)}
         </ul>
 
         {error && (
@@ -75,7 +73,7 @@ export function App() {
         )}
 
         <div ref={sentinel} />
-        {hasMore && !loading && !error && (
+        {hasMore && (
           <div className="more">
             <button type="button" className="button" onClick={loadMore}>
               Carregar mais
@@ -97,14 +95,7 @@ export function App() {
         </div>
       </footer>
 
-      {selected && (
-        <CharacterDialog
-          key={selected}
-          id={selected}
-          initial={items.find((c) => c.id === selected)}
-          onClose={() => setSelected(null)}
-        />
-      )}
+      {selected && catalog && <CharacterDialog key={selected} id={selected} catalog={catalog} onClose={() => setSelected(null)} />}
     </>
   );
 }
