@@ -3,14 +3,14 @@ import { EMPTY_FILTERS, type Filters } from "./data";
 
 // Seção, filtros e detalhe aberto ficam na URL para o link ser compartilhável.
 
-export type Tab = "personagens" | "episodios" | "locais";
+export type Tab = "personagens" | "episodios" | "locais" | "quiz";
 export type Kind = "personagem" | "episodio" | "local";
 export interface Selected {
   kind: Kind;
   id: number;
 }
 
-const TABS: Tab[] = ["personagens", "episodios", "locais"];
+const TABS: Tab[] = ["personagens", "episodios", "locais", "quiz"];
 const KINDS: Kind[] = ["personagem", "episodio", "local"];
 const KEYS: Record<keyof Filters, string> = { name: "busca", status: "status", species: "especie", gender: "genero" };
 

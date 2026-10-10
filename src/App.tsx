@@ -3,12 +3,13 @@ import { CardSkeleton, CharacterCard } from "./components/CharacterCard";
 import { DetailDialog } from "./components/DetailDialog";
 import { EpisodesView } from "./components/EpisodesView";
 import { LocationsView } from "./components/LocationsView";
+import { QuizView } from "./components/QuizView";
 import { Toolbar } from "./components/Toolbar";
 import { I18nContext, STRINGS, initialLang, makeLabels, saveLang, type Lang } from "./i18n";
 import { useCharacters } from "./useCharacters";
 import { useUrlState, type Tab } from "./useUrlState";
 
-const TABS: Tab[] = ["personagens", "episodios", "locais"];
+const TABS: Tab[] = ["personagens", "episodios", "locais", "quiz"];
 
 export function App() {
   const [lang, setLangState] = useState<Lang>(initialLang);
@@ -49,7 +50,7 @@ export function App() {
     return () => observer.disconnect();
   }, [hasMore, loadMore, tab]);
 
-  const totals = catalog && {
+  const totals: Partial<Record<Tab, number>> | null = catalog && {
     personagens: catalog.characters.length,
     episodios: catalog.episodeList.length,
     locais: catalog.locationList.length,
@@ -91,7 +92,7 @@ export function App() {
             {TABS.map((id) => (
               <button key={id} type="button" aria-current={tab === id ? "page" : undefined} onClick={() => setTab(id)}>
                 {t.tabs[id]}
-                {totals && <span>{l.number(totals[id])}</span>}
+                {totals?.[id] !== undefined && <span>{l.number(totals[id])}</span>}
               </button>
             ))}
           </nav>
@@ -140,6 +141,7 @@ export function App() {
 
         {tab === "episodios" && catalog && <EpisodesView catalog={catalog} onOpen={open} />}
         {tab === "locais" && catalog && <LocationsView catalog={catalog} onOpen={open} />}
+        {tab === "quiz" && catalog && <QuizView catalog={catalog} onOpen={open} />}
         {tab !== "personagens" && loading && <p className="count">{t.loading}</p>}
       </main>
 

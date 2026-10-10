@@ -1,6 +1,6 @@
 # Rick and Morty · Guia da série
 
-Guia da série em **português e inglês** (`?lang=pt` ou `?lang=en` na URL), com personagens,
+Guia da série e quiz em **português e inglês** (`?lang=pt` ou `?lang=en` na URL), com personagens,
 episódios e locais, todos ligados entre si:
 
 - **Personagens:** busca por nome, filtros por situação, espécie e gênero, e rolagem infinita.
@@ -8,6 +8,9 @@ episódios e locais, todos ligados entre si:
 - **Locais:** planetas, dimensões e outros lugares, com os moradores de cada um.
 - **Detalhes ligados:** do personagem se vai à origem, à localização e aos episódios; do
   episódio, ao elenco; do local, aos moradores. O "voltar" do navegador volta ao detalhe anterior.
+- **Quiz:** perguntas geradas a cada partida a partir dos dados (quem é o personagem, situação,
+  espécie, origem, quem aparece no episódio, temporada e primeira aparição), em três níveis e com
+  10 ou 20 perguntas. No fim, cada resposta leva ao detalhe no guia.
 
 Seção, filtros e detalhe aberto ficam na URL, então qualquer tela pode ser compartilhada por link.
 
