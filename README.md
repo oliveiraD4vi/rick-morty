@@ -1,20 +1,24 @@
-# Rick and Morty
-<img src="./src/assets/example-img/display.png" alt="app display"></img>
+# Rick and Morty · Guia de personagens
 
-## Description
-<p>
-  This is a screen to show character information from the Rick and Morty animated series built with React Js. Such information can be the name of the characters, their species, gender and origin in the universe of the series.
-</p>
+Guia dos personagens da série, com busca por nome, filtros por situação,
+espécie e gênero, rolagem infinita e os episódios em que cada personagem
+aparece. Os filtros e o personagem aberto ficam na URL, então qualquer busca
+pode ser compartilhada por link.
 
-## Features
+**Acesse:** [rick-morty.coaladev.com.br](https://rick-morty.coaladev.com.br)
 
-<ul>
-  <li>Characters List: There is a right side menu with familiar characters from the series listed on clickable cards.</li>
-  <li>Search by Name: There is a search box on the right side menu that allows you to search for specific characters by their name.</li>
-  <li>Details view: There is a central viewing area for viewing the character information selected in the side menu.</li>
-</ul>
+Os dados vêm da [Rick and Morty API](https://rickandmortyapi.com).
 
-## API
-<p>
-  The API used can be found at <a href="https://rickandmortyapi.com/">The Rick and Morty API</a>. It has all the information used here, as well as others not explored in this project.
-</p>
+## Stack
+
+- [React 19](https://react.dev) e TypeScript
+- [Vite](https://vite.dev)
+- CSS próprio, sem biblioteca de componentes
+
+## Rodando
+
+```bash
+npm install
+npm run dev       # http://localhost:5173
+npm run build     # gera dist/
+```
