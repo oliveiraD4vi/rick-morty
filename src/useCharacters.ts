@@ -13,10 +13,14 @@ export function useCharacters(filters: Filters) {
     setError(null);
     loadCatalog().then(setCatalog, () => setError("Verifique sua conexão e tente de novo."));
   }, []);
-  useEffect(load, [load]);
+  useEffect(() => {
+    load();
+  }, [load]);
 
   const matches = useMemo(() => (catalog ? filterCharacters(catalog.characters, filters) : []), [catalog, filters]);
-  useEffect(() => setVisible(PAGE), [filters]);
+  useEffect(() => {
+    setVisible(PAGE);
+  }, [filters]);
 
   const hasMore = visible < matches.length;
   const loadMore = useCallback(() => setVisible((v) => v + PAGE), []);

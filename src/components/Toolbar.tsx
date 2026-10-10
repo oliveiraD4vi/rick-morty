@@ -10,7 +10,9 @@ interface Props {
 export function Toolbar({ filters, onChange }: Props) {
   // A busca espera o usuário parar de digitar antes de consultar a API.
   const [name, setName] = useState(filters.name);
-  useEffect(() => setName(filters.name), [filters.name]);
+  useEffect(() => {
+    setName(filters.name);
+  }, [filters.name]);
   useEffect(() => {
     if (name === filters.name) return;
     const timer = setTimeout(() => onChange({ ...filters, name: name.trim() }), 350);

@@ -153,16 +153,77 @@ main { padding-block: 20px 56px; }
 .facts dt { color: var(--muted); font-size: 0.8rem; }
 .facts dd { font-weight: 600; }
 
-.episodes { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 18px; }
-.episodes h3 { font-size: 1.05rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.episodes h3 span { font-size: 0.8rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; color: var(--muted); }
-.episodes ol { list-style: none; padding: 0; display: grid; gap: 2px; }
-.episodes li { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; padding: 8px 10px; border-radius: 10px; }
-.episodes li:nth-child(odd) { background: var(--surface-2); }
-@media (min-width: 560px) { .episodes li { grid-template-columns: 70px 1fr auto; align-items: center; } }
-.episodes code { color: var(--portal); font-size: 0.85rem; font-weight: 700; }
-.episodes time { color: var(--muted); font-size: 0.85rem; grid-column: 2; }
-@media (min-width: 560px) { .episodes time { grid-column: auto; } }
+.dialog-text-head { padding-right: 48px; }
+.dialog-text-head h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); line-height: 1.1; margin: 6px 0 6px; }
+.link {
+  padding: 0; border: 0; background: none; cursor: pointer; text-align: left; font-weight: 600; color: var(--portal);
+  text-decoration: underline; text-decoration-color: rgba(151, 206, 76, 0.4); text-underline-offset: 3px;
+}
+.link:hover { text-decoration-color: var(--portal); }
+
+.related { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 18px; }
+.related h3, .season h2 { font-size: 1.05rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.related h3 span, .season h2 span {
+  font-size: 0.8rem; font-weight: 600; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; color: var(--muted);
+}
+
+.episode-list { list-style: none; padding: 0; display: grid; gap: 2px; }
+.episode-row {
+  width: 100%; display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; align-items: center; padding: 9px 10px;
+  border: 0; border-radius: 10px; background: transparent; text-align: left; cursor: pointer;
+}
+.episode-list li:nth-child(odd) .episode-row { background: var(--surface-2); }
+.episode-row:hover { outline: 1px solid color-mix(in srgb, var(--portal) 50%, transparent); }
+@media (min-width: 560px) { .episode-row { grid-template-columns: 72px 1fr auto auto; } }
+.episode-row code { color: var(--portal); font-size: 0.85rem; font-weight: 700; }
+.episode-row time { color: var(--muted); font-size: 0.85rem; grid-column: 2; }
+.episode-row .faces { grid-column: 2; }
+@media (min-width: 560px) { .episode-row time, .episode-row .faces { grid-column: auto; } }
+
+.faces { display: inline-flex; align-items: center; }
+.face { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; border: 2px solid var(--surface); background: var(--surface-2); margin-left: -8px; flex: none; }
+.face:first-child { margin-left: 0; }
+.face img { width: 100%; height: 100%; object-fit: cover; }
+.face .avatar-fallback { font-size: 0.6rem; }
+.faces-count { margin-left: 8px; font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+
+.people { list-style: none; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+.people button { width: 100%; display: grid; gap: 6px; justify-items: center; padding: 8px 4px; border: 0; border-radius: 12px; background: transparent; cursor: pointer; }
+.people button:hover { background: var(--surface-2); }
+.people-image { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: var(--surface-2); border: 2px solid var(--line); }
+.people-image img { width: 100%; height: 100%; object-fit: cover; }
+.people-image .avatar-fallback { font-size: 1.1rem; }
+.people-name { font-size: 0.8rem; text-align: center; line-height: 1.25; overflow-wrap: anywhere; }
+
+/* ---------- Seções ---------- */
+.tabs { display: flex; gap: 4px; margin-bottom: 12px; overflow-x: auto; scrollbar-width: none; }
+.tabs button {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; cursor: pointer;
+  border: 1px solid transparent; background: transparent; color: var(--muted); font-weight: 700; white-space: nowrap;
+}
+.tabs button:hover { color: var(--text); }
+.tabs button[aria-current="page"] { background: var(--surface); border-color: var(--line); color: var(--text); }
+.tabs span { font-size: 0.75rem; color: var(--muted); background: var(--surface-2); border-radius: 999px; padding: 0 8px; }
+.tabs button[aria-current="page"] span { background: rgba(151, 206, 76, 0.16); color: var(--portal-strong); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.chips button { min-height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-weight: 600; }
+.chips button[aria-pressed="true"] { border-color: var(--portal); color: var(--portal-strong); background: rgba(151, 206, 76, 0.1); }
+.season + .season { margin-top: 32px; }
+.season h2 { font-size: 1.25rem; }
+
+.toolbar-two { margin-bottom: 4px; }
+@media (min-width: 860px) { .toolbar-two { grid-template-columns: minmax(240px, 1fr) auto; } }
+.locations { list-style: none; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+.location {
+  width: 100%; height: 100%; display: grid; gap: 6px; align-content: start; text-align: left; padding: 16px; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); transition: border-color 0.15s, transform 0.15s;
+}
+.location:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--portal) 55%, var(--line)); }
+.location h3 { font-size: 1.05rem; line-height: 1.25; }
+.location-type { color: var(--portal); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.location .faces { margin-top: 6px; }
+.location-empty { font-size: 0.85rem; margin-top: 6px; }
 
 /* ---------- Rodapé ---------- */
 .footer { border-top: 1px solid var(--line); padding-block: 22px; color: var(--muted); font-size: 0.9rem; }

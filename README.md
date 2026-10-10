@@ -1,13 +1,20 @@
 # Rick and Morty · Guia de personagens
 
-Guia dos personagens da série, com busca por nome, filtros por situação,
-espécie e gênero, rolagem infinita e os episódios em que cada personagem
-aparece. Os filtros e o personagem aberto ficam na URL, então qualquer busca
-pode ser compartilhada por link.
+Guia da série com personagens, episódios e locais, todos ligados entre si:
+
+- **Personagens:** busca por nome, filtros por situação, espécie e gênero, e rolagem infinita.
+- **Episódios:** agrupados por temporada, com o elenco de cada um.
+- **Locais:** planetas, dimensões e outros lugares, com os moradores de cada um.
+- **Detalhes ligados:** do personagem se vai à origem, à localização e aos episódios; do
+  episódio, ao elenco; do local, aos moradores. O "voltar" do navegador volta ao detalhe anterior.
+
+Seção, filtros e detalhe aberto ficam na URL, então qualquer tela pode ser compartilhada por link.
 
 **Acesse:** [rick-morty.coaladev.com.br](https://rick-morty.coaladev.com.br)
 
-Os dados vêm da [Rick and Morty API](https://rickandmortyapi.com).
+Os dados vêm da [Rick and Morty API](https://rickandmortyapi.com). Como ela limita rajadas de
+requisições, o app usa uma cópia local dos dados (`src/data/snapshot.json`, gerada por
+`npm run snapshot`) e as imagens passam por `/avatar/`, que o servidor guarda em cache.
 
 ## Stack
 

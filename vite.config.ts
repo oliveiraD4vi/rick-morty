@@ -1,13 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// Em produção o nginx serve /avatar/ com cache; aqui o Vite repassa direto para a API.
+// /avatar/ é servido pelo nginx de rick-morty.coaladev.com.br, que guarda as imagens da API em cache.
+// Em desenvolvimento o Vite repassa para lá, sem esbarrar no limite de requisições da API.
 const avatarProxy = {
-  "/avatar": {
-    target: "https://rickandmortyapi.com",
-    changeOrigin: true,
-    rewrite: (path: string) => path.replace(/^\/avatar/, "/api/character/avatar"),
-  },
+  "/avatar": { target: "https://rick-morty.coaladev.com.br", changeOrigin: true },
 };
 
 export default defineConfig({
