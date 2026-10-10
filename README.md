@@ -29,3 +29,11 @@ npm install
 npm run dev       # http://localhost:5173
 npm run build     # gera dist/
 ```
+
+Com Docker (as imagens em `/avatar/` dependem do proxy da frente, veja o deploy em
+[coaladev.com.br](https://github.com/oliveiraD4vi/me)):
+
+```bash
+docker build -t rick-morty .
+docker run -p 4703:80 rick-morty
+```
